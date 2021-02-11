@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Lists extends Model {
+  class Items extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,30 +9,30 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // list belongs to one user
-      models.Lists.belongsTo(models.Users, { foreignKey: "user_id" });
-      // list has many items
-      models.Lists.hasMany(models.Items, { foreignKey: "list_id"})
+      // items BELONGS TO a list
+      models.Items.belongsTo(models.Lists, { foreignKey: "list_id"})
     }
   }
-  Lists.init(
+  Items.init(
     {
-      list_id: {
+      item_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      item_name: DataTypes.STRING,
+      title: DataTypes.STRING,
+      description: DataTypes.TEXT,
       quantity: DataTypes.INTEGER,
       price: DataTypes.DOUBLE,
-      link: DataTypes.STRING,
-      description: DataTypes.TEXT,
+      link: DataTypes.TEXT,
+      purchased: DataTypes.BOOLEAN,
+      table_id: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "Lists",
+      modelName: "Items",
     }
   );
-  return Lists;
+  return Items;
 };
