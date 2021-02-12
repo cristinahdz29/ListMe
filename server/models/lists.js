@@ -23,11 +23,20 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         allowNull: false,
       },
-      item_name: DataTypes.STRING,
-      quantity: DataTypes.INTEGER,
-      price: DataTypes.DOUBLE,
-      link: DataTypes.STRING,
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      event: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      event_date: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
       description: DataTypes.TEXT,
+      user_id: DataTypes.INTEGER,
     },
     {
       sequelize,

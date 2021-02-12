@@ -10,21 +10,25 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       description: {
         type: Sequelize.TEXT,
       },
       quantity: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       price: {
         type: Sequelize.DOUBLE,
+        allowNull: false,
       },
       link: {
         type: Sequelize.TEXT,
       },
       purchased: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       list_id: {
         type: Sequelize.INTEGER,

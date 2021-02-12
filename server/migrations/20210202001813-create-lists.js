@@ -10,9 +10,15 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       event: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      event_date: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       description: {
         type: Sequelize.TEXT,

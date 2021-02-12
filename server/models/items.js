@@ -21,13 +21,25 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         allowNull: false,
       },
-      title: DataTypes.STRING,
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       description: DataTypes.TEXT,
-      quantity: DataTypes.INTEGER,
-      price: DataTypes.DOUBLE,
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      price: {
+        type: DataTypes.DOUBLE,
+        allowNull: false,
+      },
       link: DataTypes.TEXT,
-      purchased: DataTypes.BOOLEAN,
-      table_id: DataTypes.INTEGER,
+      purchased: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      list_id: DataTypes.INTEGER,
     },
     {
       sequelize,

@@ -12,6 +12,7 @@ const bcrypt = require("bcryptjs");
  * @param {Object} payload user values needed for creation
  * @returns {Object} User object
  */
+
 module.exports = async (payload) => {
   //hashing password
   const salt = await bcrypt.genSaltSync(10);
