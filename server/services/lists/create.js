@@ -7,6 +7,7 @@ const { Lists, Users } = require("../../models");
  * Creates a list
  * @example <caption>Example usage of method1.</caption>
  * @param {Object} payload user values needed for list creation
+ * @param {Object} user_id user id needed to validate user
  * @returns {Object} List object
  */
 
