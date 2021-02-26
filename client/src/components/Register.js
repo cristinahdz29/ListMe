@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
 } from "grommet";
 import { grommet } from "grommet/themes";
 import { deepMerge } from "grommet/utils";
+import axios from "axios";
 
 const customTheme = deepMerge(grommet, {
   formField: {
@@ -20,7 +21,38 @@ const customTheme = deepMerge(grommet, {
   },
 });
 
-function Register() {
+function Register(props) {
+  // need to set up a state to collect info from the input boxes
+  const [registrationInfo, setRegistrationInfo] = useState({
+    firstName: '',
+    lastName:'',
+    email: '',
+    password: ''
+  })
+
+  // function to set state with user registration info
+  const handleChange = (e) => {
+    setRegistrationInfo({
+      ...registrationInfo,
+      [e.target.name]: e.target.value,
+    });
+      
+  }
+
+  // function to handleSubmit of infor once button is clicked
+  const handleSubmit = async () => {
+    await axios.post('http://localhost:3001/register/user', {
+      first_name: registrationInfo.firstName,
+      last_name: registrationInfo.lastName,
+      email: registrationInfo.email,
+      password: registrationInfo.password
+    })
+
+    props.history.push('/login')
+  }
+
+
+
   return (
     <Grommet theme={customTheme}>
       <Box align="center" pad="large">
@@ -32,7 +64,11 @@ function Register() {
             label="First Name"
             required
           >
-            <TextInput id="firstName" name="firstName" />
+            <TextInput
+              id="firstName"
+              name="firstName"
+              onChange={handleChange}
+            />
           </FormField>
           <FormField
             name="lastName"
@@ -40,10 +76,15 @@ function Register() {
             label="Last Name"
             required
           >
-            <TextInput id="lastName" name="lastName" />
+            <TextInput id="lastName" name="lastName" onChange={handleChange} />
           </FormField>
           <FormField name="email" htmlFor="email" label="Email" required>
-            <TextInput id="email" name="email" type="email" />
+            <TextInput
+              id="email"
+              name="email"
+              type="email"
+              onChange={handleChange}
+            />
           </FormField>
           <FormField
             name="password"
@@ -51,9 +92,19 @@ function Register() {
             label="Password"
             required
           >
-            <TextInput id="password" name="password" type="password" />
+            <TextInput
+              id="password"
+              name="password"
+              type="password"
+              onChange={handleChange}
+            />
           </FormField>
-          <Button type="submit" label="Register" primary />
+          <Button
+            type="submit"
+            label="Register"
+            onClick={handleSubmit}
+            primary
+          />
           <Text margin={{ left: "small" }} size="small" color="status-critical">
             * Required Field
           </Text>
