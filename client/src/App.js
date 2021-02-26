@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {Box, grommet, Grommet, Button } from "grommet";
 
-function App() {
+
+function App(props) {
+  // adding state within our app
+  // need to make a call to the backend to register a user
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grommet theme={grommet}>
+      <Box align="center" pad="medium">
+        <Button primary label="Register" size="large" onClick={() => {}} {...props} />
+      </Box>
+      
+    </Grommet>
   );
 }
 
