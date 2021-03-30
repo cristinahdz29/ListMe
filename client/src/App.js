@@ -1,5 +1,8 @@
 import React from "react";
-import {Box, grommet, Grommet, Button } from "grommet";
+
+import './styles/App.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import { NavLink } from "react-router-dom";
 
 
 function App(props) {
@@ -8,12 +11,23 @@ function App(props) {
   
 
   return (
-    <Grommet theme={grommet}>
-      <Box align="center" pad="medium">
-        <Button primary label="Register" size="large" onClick={() => {}} {...props} />
-      </Box>
-      
-    </Grommet>
+    <div className="main-content">
+      <h1>
+        Feeling <b>Overwhelmed?</b> Let us help.{" "}
+        <b className="bold-overwhelmed">ListMe</b> offers a simple way to stay
+        organized and up to date.
+      </h1>
+      <div className="home-options">
+        <div className="home-link">
+          <NavLink className="navLink" to="/register/user">
+            <h3 className="bold-overwhelmed">Sign Up</h3>
+          </NavLink>
+        </div>
+        <div className="home-link">
+          <h3 className="bold-overwhelmed">Explore</h3>
+        </div>
+      </div>
+    </div>
   );
 }
 

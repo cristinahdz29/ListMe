@@ -1,0 +1,45 @@
+.main-content {
+    width: 60%;
+    margin: 10% auto;
+    height: 100%;
+    ;
+}
+
+h1 {
+    text-align: center;
+}
+
+.bold-overwhelmed {
+    color: #f76b8a;
+}
+
+.home-options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10%;
+}
+
+.home-link {
+    background-color: #f7ecec;
+    padding: 2%;
+    border: solid black 1px;
+    box-shadow: 8px 8px;
+    transition: 0.3s
+    
+}
+
+.home-link:hover {
+    box-shadow: none;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+
+.home-link:active {
+    border: solid black 3px;
+    transform: scale(0.9);
+}
+
+a:hover {
+    text-decoration: none;
+}

@@ -1,34 +1,17 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Form,
-  FormField,
-  Grommet,
-  Text,
-  TextInput,
-  Heading
-} from "grommet";
-import { grommet } from "grommet/themes";
-import { deepMerge } from "grommet/utils";
 import axios from "axios";
-
-const customTheme = deepMerge(grommet, {
-  formField: {
-    label: {
-      requiredIndicator: true,
-    },
-  },
-});
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import '../styles/Registration.css'
 
 function Register(props) {
   // need to set up a state to collect info from the input boxes
   const [registrationInfo, setRegistrationInfo] = useState({
-    firstName: '',
-    lastName:'',
-    email: '',
-    password: ''
-  })
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
   // function to set state with user registration info
   const handleChange = (e) => {
@@ -36,81 +19,74 @@ function Register(props) {
       ...registrationInfo,
       [e.target.name]: e.target.value,
     });
-      
-  }
+  };
 
   // function to handleSubmit of infor once button is clicked
   const handleSubmit = async () => {
-    await axios.post('http://localhost:3001/register/user', {
+    await axios.post("http://localhost:3001/register/user", {
       first_name: registrationInfo.firstName,
       last_name: registrationInfo.lastName,
       email: registrationInfo.email,
-      password: registrationInfo.password
-    })
+      password: registrationInfo.password,
+    });
 
-    props.history.push('/login')
-  }
+    props.history.push("/login/user");
+  };
 
-
+  //input boxes with handleChange,  button with handleSubmit function
+  // and names for each
 
   return (
-    <Grommet theme={customTheme}>
-      <Box align="center" pad="large">
-        <Heading color="brand">We'll need just a few things...</Heading>
-        <Form>
-          <FormField
+    <div className="registration-div">
+      <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            
+            placeholder="Enter first name"
             name="firstName"
-            htmlFor="firstName"
-            label="First Name"
-            required
-          >
-            <TextInput
-              id="firstName"
-              name="firstName"
-              onChange={handleChange}
-            />
-          </FormField>
-          <FormField
-            name="lastName"
-            htmlFor="lastName"
-            label="Last Name"
-            required
-          >
-            <TextInput id="lastName" name="lastName" onChange={handleChange} />
-          </FormField>
-          <FormField name="email" htmlFor="email" label="Email" required>
-            <TextInput
-              id="email"
-              name="email"
-              type="email"
-              onChange={handleChange}
-            />
-          </FormField>
-          <FormField
-            name="password"
-            htmlFor="password"
-            label="Password"
-            required
-          >
-            <TextInput
-              id="password"
-              name="password"
-              type="password"
-              onChange={handleChange}
-            />
-          </FormField>
-          <Button
-            type="submit"
-            label="Register"
-            onClick={handleSubmit}
-            primary
+            onChange={handleChange}
           />
-          <Text margin={{ left: "small" }} size="small" color="status-critical">
-            * Required Field
-          </Text>
-        </Form>
-      </Box>
-    </Grommet>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            
+            placeholder="Enter last name"
+            onChange={handleChange}
+            name="lastName"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            onChange={handleChange}
+            name="email"
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+            name="password"
+          />
+        </Form.Group>
+
+        <Button variant="primary" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
+    </div>
   );
 }
 

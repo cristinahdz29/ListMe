@@ -1,0 +1,14 @@
+.header-buttons {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.button {
+    color:  #f76b8a;
+    border-radius: 0px;
+}
+
+.button-div {
+    border: solid black 1px;
+}

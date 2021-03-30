@@ -7,6 +7,7 @@ import BaseLayout from "./components/BaseLayout";
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Register from './components/Register';
 import Login from './components/Login';
+import './index.css'
 
 
 
@@ -16,8 +17,8 @@ ReactDOM.render(
       <BaseLayout>
         <Switch>
           <Route component={App} path="/" exact />
-          <Route component={Register} path="/register" />
-          <Route component={Login} path="/login" />
+          <Route component={Register} path="/register/user" />
+          <Route component={Login} path="/login/user" />
         </Switch>
       </BaseLayout>
     </BrowserRouter>
