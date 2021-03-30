@@ -24,7 +24,9 @@ function App(props) {
           </NavLink>
         </div>
         <div className="home-link">
-          <h3 className="bold-overwhelmed">Explore</h3>
+          <NavLink to='/explore'>
+            <h3 className="bold-overwhelmed">Explore</h3>
+          </NavLink>
         </div>
       </div>
     </div>
