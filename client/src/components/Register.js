@@ -3,6 +3,7 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import '../styles/Registration.css'
+import { NavLink } from "react-router-dom";
 
 function Register(props) {
   // need to set up a state to collect info from the input boxes
@@ -86,6 +87,7 @@ function Register(props) {
           Submit
         </Button>
       </Form>
+      <p>Already have an account? <NavLink to='/login/user'>Sign In!</NavLink> </p> 
     </div>
   );
 }

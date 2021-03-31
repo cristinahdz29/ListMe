@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   //let user_id = "";
 
   //checking if user exists (has registered) by using findByEmail service
-  const user = await findUserByEmail(email);
+  const user = await findUserByEmail(req.body.email);
 
   //if user exists, need to compare passwords and if match, create a token
   // and return token to the front end

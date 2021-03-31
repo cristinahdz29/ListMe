@@ -3,13 +3,18 @@ import axios from "axios";
 import { setAuthenticationHeaders } from "../utils/authenticate";
 // need to create login to login ppl -- get the logic from GoodTutor
 
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import '../styles/Login.css'
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { NavLink } from "react-router-dom";
+import "../styles/Login.css";
+import { connect } from "react-redux";
 
 function Login(props) {
   // create state to save loginCredentials of user
-  const [loginCredentials, setLoginCredentials] = useState({}); // empty object 1st
+  const [loginCredentials, setLoginCredentials] = useState({
+    email: '',
+    password: ''
+  }); // empty object 1st
 
   //state for errors
   const [error, setError] = useState(false); // setting error to false at first
@@ -39,7 +44,8 @@ function Login(props) {
   };
 
   // create a function that calls the above function when Sign In button is clicked
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault()
     let userToken = await userLoggedIn(); // userToken will be in the form of an object
 
     if (userToken) {
@@ -52,6 +58,7 @@ function Login(props) {
       setAuthenticationHeaders(token);
 
       if (token) {
+        props.onAuthenticated()
         props.history.push("/");
       } else {
         setError(true);
@@ -89,12 +96,22 @@ function Login(props) {
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={handleLogin}>
+        <Button variant="primary" type='submit' onClick={handleLogin}>
           Submit
         </Button>
       </Form>
+      <p>
+        Don't have an account? <NavLink to="/register/user">Sign Up!</NavLink>{" "}
+      </p>
     </div>
   );
 }
 
-export default Login;
+// update the global state with mapDispatchToProps
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuthenticated: () => dispatch({type: 'ON_AUTH'})
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);
