@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 
-function CreateList() {
+function CreateList(props) {
   // Need to capture data from input boxes -- use State
   const [listDetails, setListDetails] = useState({
     title: "",
@@ -21,16 +21,20 @@ function CreateList() {
 
   // need handleSubmit function to create list
   // have function created, need to test by logging in and having a token
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+      e.preventDefault();
       try {
         const response = await axios.post("http://localhost:3001/list", {
             title: listDetails.title,
             event: listDetails.event,
-            eventDate: listDetails.eventDate,
+            event_date: listDetails.eventDate,
             description: listDetails.description,
         });
         const result = response.data
-        console.log(result)
+        // console.log(result)
+        // console.log(result.list_id)
+        // console.log(props.history)
+        props.history.push(`/list/${result.list_id}`)
       } catch (err) {
           return null
       }
@@ -71,7 +75,7 @@ function CreateList() {
           onChange={handleChange}
         ></textarea>{" "}
         <br />
-        <button>Create List</button>
+        <button onClick={handleSubmit}>Create List</button>
       </form>
     </div>
   );

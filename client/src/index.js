@@ -13,6 +13,7 @@ import "./index.css";
 import { createStore } from "redux"; // function imported from redux
 import reducer from "./store/reducer"; // function that updates the global store
 import { Provider } from 'react-redux' // component from react-redux responsible for providing global store to components
+import ViewList from "./components/ViewList";
 
 const store = createStore(reducer)
 
@@ -26,6 +27,7 @@ ReactDOM.render(
             <Route component={Register} path="/register/user" />
             <Route component={Login} path="/login/user" />
             <Route component={Explore} path="/explore" />
+            <Route component={ViewList} path="/list/:listId" />
           </Switch>
         </BaseLayout>
       </BrowserRouter>

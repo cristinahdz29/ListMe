@@ -2,12 +2,12 @@ import React from 'react'
 import CreateList from './CreateList'
 import HowItWorks from './HowItWorks'
 
-function Explore() {
+function Explore(props) {
   return (
     <div>
         <h1>Explore Component</h1>
         <HowItWorks />
-        <CreateList />
+        <CreateList {...props} />
     </div>
   );
 }
