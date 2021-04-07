@@ -18,6 +18,8 @@ const loginUser = require("../controllers/login/loginUser")
 const createList = require("../controllers/lists/create")
 const createItem = require("../controllers/items/create")
 const getItems = require("../controllers/items/get")
+const getList = require('../controllers/lists/get')
+const deleteItem = require('../controllers/items/delete')
 
 module.exports = () => {
   // Where routes for all requests will go
@@ -39,11 +41,16 @@ module.exports = () => {
 
   //create item
   //provide title, description, quantity, price, link, purchased, list_id(in params)
-  app.post("/list/:list_id/item", auth, celebrate(createItemValidation), createItem)
+  app.post("/list/:list_id/items", auth, celebrate(createItemValidation), createItem)
 
   // get items of a specific list
   // provide list_id in url params
   app.get("/list/:list_id/items", auth, getItems)
+
+  // get list details by list_id
+  app.get('/list/:listId', auth, getList)
+
+  app.delete('/lists/:listId/items/:itemId', auth, deleteItem)
 
 
   return app;

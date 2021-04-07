@@ -31,9 +31,9 @@ function Heading(props) {
 
         {/* if authenticated,show profile */}
         {props.isAuth ? (
-          <NavLink to="/profile">
+          <NavLink to="/mylists">
             <Button className="button" variant="light" size="lg">
-              Profile
+              My Lists
             </Button>
           </NavLink>
         ) : null}
