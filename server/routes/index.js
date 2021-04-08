@@ -20,6 +20,7 @@ const createItem = require("../controllers/items/create")
 const getItems = require("../controllers/items/get")
 const getList = require('../controllers/lists/get')
 const deleteItem = require('../controllers/items/delete')
+const deleteList = require('../controllers/lists/delete')
 
 module.exports = () => {
   // Where routes for all requests will go
@@ -51,6 +52,8 @@ module.exports = () => {
   app.get('/list/:listId', auth, getList)
 
   app.delete('/lists/:listId/items/:itemId', auth, deleteItem)
+
+  app.delete('/lists/:listId', auth, deleteList)
 
 
   return app;

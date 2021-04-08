@@ -7,7 +7,7 @@ const renderList = require("../../views/lists")
 
 module.exports = async (req, res, next) => {
   if (!req.user_id) {
-    res.status(422).send({ error: "Missing Student Id" });
+    res.status(422).send({ error: "Missing User Id" });
   }
 
   const list = await createList(req.body, req.user_id)

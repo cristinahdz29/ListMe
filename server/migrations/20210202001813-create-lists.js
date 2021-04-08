@@ -4,6 +4,7 @@ module.exports = {
     await queryInterface.createTable("Lists", {
       list_id: {
         allowNull: false,
+        onDelete: 'CASCADE',
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,

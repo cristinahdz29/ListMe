@@ -10,9 +10,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // list belongs to one user
-      models.Lists.belongsTo(models.Users, { foreignKey: "user_id" });
+      models.Lists.belongsTo(models.Users, {
+        foreignKey: "user_id",
+        onDelete: "CASCADE",
+      });
       // list has many items
-      models.Lists.hasMany(models.Items, { foreignKey: "list_id"})
+      models.Lists.hasMany(models.Items, {
+        foreignKey: "list_id",
+        onDelete: "CASCADE",
+      });
     }
   }
   Lists.init(
@@ -20,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       list_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        onDelete: "CASCADE",
         autoIncrement: true,
         allowNull: false,
       },
@@ -33,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       event_date: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       description: DataTypes.TEXT,
       user_id: DataTypes.INTEGER,

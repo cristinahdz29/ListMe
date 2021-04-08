@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // User has many lists
-      models.Users.hasMany(models.Lists, {foreignKey: "user_id"})
+      models.Users.hasMany(models.Lists, {foreignKey: "user_id", onDelete: 'CASCADE'})
     }
   };
   Users.init(

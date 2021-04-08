@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // items BELONGS TO a list
-      models.Items.belongsTo(models.Lists, { foreignKey: "list_id"})
+      models.Items.belongsTo(models.Lists, { foreignKey: "list_id", onDelete: 'CASCADE'})
     }
   }
   Items.init(

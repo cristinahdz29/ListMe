@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function ViewList({ match }) {
+function ViewList({ match, history }) {
   const listId = match.params.listId;
   const [ItemDetails, setItemDetails] = useState({
     title: "",
@@ -45,7 +45,7 @@ function ViewList({ match }) {
       );
       const result = response.data;
       console.log(result);
-       await fetchItems()
+      await fetchItems();
     } catch (err) {
       return null;
     }
@@ -65,21 +65,29 @@ function ViewList({ match }) {
       `http://localhost:3001/list/${listId}/items`
     );
     const result = response.data;
-    console.log(result)
-    setItems(result)
+    console.log(result);
+    setItems(result);
   };
 
-  const handleDelete = async (itemId) => {
-      await axios.delete(`http://localhost:3001/lists/${listId}/items/${itemId}`)
-      await fetchItems();
-  }
+  const handleItemDelete = async (itemId) => {
+    await axios.delete(`http://localhost:3001/lists/${listId}/items/${itemId}`);
+    await fetchItems();
+  };
+
+  // function to delete list entirely -- backend route, then implement onClick
+  const handleListDelete = async () => {
+    await axios.delete(`http://localhost:3001/lists/${listDetails.list_id}`);
+    history.push('/explore')
+  };
 
   useEffect(() => {
     fetchListDetails();
     fetchItems();
   }, []);
 
-    console.log(items)
+  //console.log(items);
+  //console.log(listDetails)
+
   return (
     <div>
       <div className="HeadingDiv">
@@ -88,7 +96,7 @@ function ViewList({ match }) {
         <h4>{listDetails.event_date} - Event Date</h4>
         <h4>{listDetails.description} - List Description</h4>
       </div>
-      <div className='inputDiv'>
+      <div className="inputDiv">
         <input
           name="title"
           type="text"
@@ -132,14 +140,19 @@ function ViewList({ match }) {
         <br />
         <button onClick={handleAddItems}>Add item</button>
       </div>
-      <div className='itemDisplayDiv'>
-        {items.map(item => (
-            <div key={item.item_id}>
-                {item.title} - {item.price} - {item.link} - {item.description} - {item.quantity} - {(item.purchased).toString()}
-                <button onClick={() => handleDelete(item.item_id)}>Delete</button>
-            </div>
+      <div className="itemDisplayDiv">
+        {items.map((item) => (
+          <div key={item.item_id}>
+            {item.title} - {item.price} - {item.link} - {item.description} -{" "}
+            {item.quantity} - {item.purchased.toString()}
+            <button onClick={() => handleItemDelete(item.item_id)}>
+              Delete
+            </button>
+          </div>
         ))}
       </div>
+      <br />
+      <button onClick={handleListDelete}>Delete List</button>
     </div>
   );
 }
