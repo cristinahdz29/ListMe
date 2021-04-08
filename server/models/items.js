@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      list_id: DataTypes.INTEGER,
+      list_id: {type: DataTypes.INTEGER, onDelete: 'CASCADE'},
     },
     {
       sequelize,

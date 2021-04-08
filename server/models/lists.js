@@ -26,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       list_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        onDelete: "CASCADE",
         autoIncrement: true,
         allowNull: false,
       },
@@ -43,7 +42,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       description: DataTypes.TEXT,
-      user_id: DataTypes.INTEGER,
+      user_id: {
+        type: DataTypes.INTEGER,
+        onDelete: "CASCADE",
+      },
     },
     {
       sequelize,

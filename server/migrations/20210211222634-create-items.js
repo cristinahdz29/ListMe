@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("Items", {
       item_id: {
         allowNull: false,
         autoIncrement: true,
-        onDelete: 'CASCADE',
+
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
@@ -33,6 +33,7 @@ module.exports = {
       },
       list_id: {
         type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
         references: {
           model: "Lists",
           key: "list_id",
@@ -49,6 +50,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Items');
-  }
+    await queryInterface.dropTable("Items");
+  },
 };
